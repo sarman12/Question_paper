@@ -5,6 +5,7 @@ import Login from './component/Login/Login';
 import Register from './component/Register/Register';
 import FirstPage from './component/First_page/First_page';
 import './App.css';
+import Dashboard from './component/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<FirstPage />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </CSSTransition>
         </TransitionGroup>

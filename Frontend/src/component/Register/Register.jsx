@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -15,7 +14,7 @@ function Register() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -23,14 +22,25 @@ function Register() {
       return;
     }
 
-    axios.post('http://localhost:5000/register', { email, password })
-      .then(response => {
-        console.log('Registration successful:', response.data);
-        navigate('/login');
-      })
-      .catch(error => {
-        console.error('Error registering:', error);
+    try {
+      const response = await fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Registration successful:', data);
+        navigate('/login');
+      } else {
+        console.error('Error registering:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error registering:', error);
+    }
   };
 
   return (
