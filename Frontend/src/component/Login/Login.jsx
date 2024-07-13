@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate=useNavigate();
+  const toregister = () =>{
+    navigate('/register');
+  }
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -36,7 +41,7 @@ function Login() {
               </div>
               <div className="login_buttons">
                 <button className="Login">Login</button>
-                <button className="sign_up">Sign up</button>
+                <button className="sign_up" onClick={toregister}>Sign up</button>
               </div>
             </div>
           </div>

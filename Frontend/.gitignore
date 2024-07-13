@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+vite.config.js
+README.md
+.eslintrc.cjs
+node_modules
+public
