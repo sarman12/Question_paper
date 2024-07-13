@@ -1,0 +1,63 @@
+/* First_page.css */
+*{
+    transition: 0.5;
+}
+body{
+    background-image: url('../assets/carolyn-christine-D7bmnvGJA2Q-unsplash.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+}
+.overall{
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+    
+        
+}
+
+.first_page_body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: justify;
+}
+.first_page_label{
+    margin-top: 6rem;
+    /* border: 2px red solid; */
+    margin-bottom: 7rem;
+}
+.first_page_label h1 {
+    font-size: 60pt;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right,rgb(254, 167, 6),rgb(53, 54, 45));
+    width: 60%;
+    font-size: 3.4rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+.first_page_label h2 {
+    font-size: 2rem;
+    color: #666;
+}
+
+button {
+    margin-top: 1rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #f6f8fa;
+    color: rgb(9, 8, 8);
+    color: #f37323;
+    border: rgb(255, 132, 0) 2px solid;
+    border-radius: 1rem;
+    transition: background-color 0.9s;
+}
+
+button:hover {
+    background-color: #f37323;
+    color: white;
+}
