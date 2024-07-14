@@ -52,7 +52,7 @@ function Login() {
               <p>Login</p>
               <form onSubmit={handleLogin}>
                 <div className="login_input_box">
-                  <label htmlFor="email">Email</label>
+                  {/* <label htmlFor="email">Email</label> */}
                   <input
                     type="email"
                     id="email"
@@ -60,7 +60,7 @@ function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <label htmlFor="password">Password</label>
+                  {/* <label htmlFor="password">Password</label> */}
                   <div className="password_container">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -77,7 +77,7 @@ function Login() {
                   <a href="#">Forgot Password?</a>
                 </div>
                 <div className="login_buttons">
-                  <button type="submit" className="login">Login</button>
+                  <button type="submit" className="Login">Login</button>
                   <button type="button" className="sign_up" onClick={toRegister}>Sign up</button>
                 </div>
               </form>

@@ -13,15 +13,15 @@ body {
 }
 
 .Register_page_container {
+    /* border: 3px red solid; */
 
     display: flex;
     flex-direction: column;
-    min-height: 80vh;
+    min-height: 82.7vh;
 }
 
 
 .Register_page_main_body {
-    /* border: 5px red solid; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,24 +31,35 @@ body {
 }
 
 .Register {
+        background-image: linear-gradient(315deg, #ff5f6d 0%, #ffc371 74%);
+    /* background-color: ; */
+    border: 1px red solid;
     margin: auto;
     background-color: #fff;
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 1rem;
     text-align: center;
     width: 35%;
-    box-shadow: 0px 0px 40px 30px rgba(10, 10, 10, 0.1);
-    border-radius: 1rem;
+        box-shadow: 0px 0px 20px 10px rgba(218, 11, 11, 0.1);    border-radius: 1rem;
+
 }
 
 .Register_container {
-    /* border: 5px red solid; */
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.);
+    /* Adjusted opacity here */
     margin: auto;
-    width: 86%;
-    height: 85%;
+    width: 87%;
+    height: 80%;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    border: 1px solid transparent;
+    animation: borderAnimation 5s infinite linear;
 }
 
 .Register_container p {
-    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #242424;
     background-image: linear-gradient(to right, red, rgb(53, 54, 45));
@@ -59,38 +70,29 @@ body {
 .input_box {
     /* border: 1px red solid; */
     margin: auto;
-    margin-bottom: -2rem;
+    margin-bottom: -1rem;
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     width: 80%;
     position: relative;
 }
 
-.input_box label {
-    margin-bottom: 0.6rem;
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
 .input_box input {
     width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.6rem 2.5rem 0.6rem 0.6rem;
-    border-radius: 0.6rem;
-    box-shadow: 0px 0px 5px 0px rgb(16, 10, 10);
-    color: black !important;
-    border: none;
-    font-weight: 600;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
 }
 
 .eye_icon {
     position: absolute;
     right: 1rem;
     top: 50%;
-    transform: translate(-90%, -17%);
+    transform: translate(-50%, -45%);
     cursor: pointer;
     font-size: 1.5rem;
     color: #555;
@@ -111,7 +113,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 0.5rem 2rem 01rem 2rem;
+    padding: 0.5rem 1rem 01rem 1rem;
     width: 80%;
     margin-top: -0.5rem;
 }
@@ -121,13 +123,14 @@ body {
     font-weight: 600;
     font-size: 1.1rem;
     padding: 0.4rem;
-    border: 1px red solid;
+    border: 1px rgb(15, 13, 13) solid;
     border-radius: 0.6rem;
 }
 
 .register {
-    background-color: red;
-    color: white;
+        background-image: linear-gradient(315deg, #ff5f6d 0%, #ffc371 74%);        color: white;
+        cursor: pointer;
+        transition: background-image 0.1s;
 }
 
 .sign_up {
@@ -136,8 +139,10 @@ body {
 }
 
 .register:hover {
-    color: red;
-    background-color: white;
+    color: white;
+        background-image: linear-gradient(315deg,
+            #ffc371 0%, #ff5f6d 74%);
+            color: white;
 }
 
 .sign_up:hover {
@@ -163,4 +168,8 @@ body {
 
 .google {
     cursor: pointer;
+}
+@keyframes animation {
+    0% {clip-path: polygon(50% 0%, 96% 4%, 100% 43%, 97% 95%, 68% 100%, 32% 100%, 4% 96%, 0% 43%, 5% 4%);} 
+    100% {clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 70%, 87% 100%, 50% 100%, 0 100%, 0% 70%, 0% 35%, 15% 0);}   
 }

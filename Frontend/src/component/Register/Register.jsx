@@ -51,7 +51,7 @@ function Register() {
             <p>Register</p>
             <form onSubmit={handleSubmit}>
               <div className="input_box">
-                <label htmlFor="email">Email</label>
+                {/* <label htmlFor="email">Email</label> */}
                 <input
                   type="email"
                   id="email"
@@ -59,7 +59,7 @@ function Register() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <label htmlFor="password">Password</label>
+                {/* <label htmlFor="password">Password</label> */}
                 <div className="password_container">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -73,7 +73,7 @@ function Register() {
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </div>
                 </div>
-                <label htmlFor="confirm-password">Confirm Password</label>
+                {/* <label htmlFor="confirm-password">Confirm Password</label> */}
                 <div className="password_container">
                   <input
                     type={showPassword ? "text" : "password"}

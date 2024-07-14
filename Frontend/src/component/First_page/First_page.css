@@ -3,10 +3,8 @@
     transition: 0.5;
 }
 body{
-    background-image: url('../assets/carolyn-christine-D7bmnvGJA2Q-unsplash.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+    
+            background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
 }
 .overall{
     display: flex;

@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const PDFDocument = require('pdfkit');
+const { Buffer } = require('buffer');
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -9,7 +11,7 @@ app.use(cors());
 // Initialize Sequelize
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'database.sqlite' // Path to the SQLite file
+  storage: 'database.sqlite'
 });
 
 // Define Employee model
@@ -73,6 +75,50 @@ app.post('/login', async (req, res) => {
   } catch (err) {
     console.error('Error logging in:', err);
     res.status(500).json({ error: 'Failed to login employee' });
+  }
+});
+
+app.post('/generate', (req, res) => {
+  const { courseName, courseCode, questions } = req.body;
+
+  if (!courseName || !courseCode || !questions) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+
+  try {
+    const doc = new PDFDocument();
+    let buffers = [];
+    doc.on('data', buffers.push.bind(buffers));
+    doc.on('end', () => {
+      let pdfData = Buffer.concat(buffers);
+      res.contentType('application/pdf');
+      res.send(pdfData);
+    });
+
+    // Add content to the PDF
+    // const logoPath = './assets/makaut.jpg'; // Adjust this path to your actual image location
+    // doc.image(logoPath, 45, 705, { width: 100, height: 100 });
+
+    const universityName = "Maulana Abul Kalam Azad University of Technology (In House),MAKAUT";
+    const universityAddress = "NH-12(Old NH-34)Simhat, Haringhata,Nadia,Pin-741249,West Benagl";
+    doc.fontSize(12).text(universityAddress, 180, 740);
+    doc.fontSize(16).text(universityName, 180, 760, { bold: true });
+
+    const examHeading = "End Semester Exam - June-July 2024";
+    doc.fontSize(16).text(examHeading, 50, 700, { bold: true });
+
+    doc.fontSize(12).text(`Course Name: ${courseName}`, 50, 680);
+    doc.text(`Course Code: ${courseCode}`, 50, 665);
+    doc.text("Questions:", 50, 640);
+
+    questions.split('\n').forEach((line, index) => {
+      doc.text(line, 50, 620 - (index * 20));
+    });
+
+    doc.end();
+  } catch (err) {
+    console.error('Error generating PDF:', err);
+    res.status(500).json({ error: 'Failed to generate PDF' });
   }
 });
 
