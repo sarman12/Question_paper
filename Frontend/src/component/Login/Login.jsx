@@ -71,7 +71,7 @@ function Login() {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className="login_eye_icon" onClick={togglePasswordVisibility}>
-                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                      {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
                     </div>
                   </div>
                   <a href="#">Forgot Password?</a>

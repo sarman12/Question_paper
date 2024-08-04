@@ -32,7 +32,6 @@ body {
 
 .Register {
         background-image: linear-gradient(315deg, #ff5f6d 0%, #ffc371 74%);
-    /* background-color: ; */
     border: 1px red solid;
     margin: auto;
     background-color: #fff;
@@ -73,6 +72,7 @@ body {
     margin-bottom: -1rem;
     display: flex;
     flex-direction: column;
+    gap: 5px;
     text-align: left;
     padding: 0.5rem 1rem;
     width: 80%;
@@ -128,26 +128,25 @@ body {
 }
 
 .register {
-        background-image: linear-gradient(315deg, #ff5f6d 0%, #ffc371 74%);        color: white;
+        background-color:#201e20;  
+             color: white;
         cursor: pointer;
-        transition: background-image 0.1s;
+        transition: 0.6s ;
 }
 
 .sign_up {
-    color: red;
+    color: #201e20;
     background-color: white;
 }
 
 .register:hover {
-    color: white;
-        background-image: linear-gradient(315deg,
-            #ffc371 0%, #ff5f6d 74%);
-            color: white;
+    color:  #201e20;;
+     background-color: white;
 }
 
 .sign_up:hover {
     color: white;
-    background-color: red;
+    background-color: #201e20;
 }
 
 .social {

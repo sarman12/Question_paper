@@ -70,7 +70,7 @@ function Register() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className="eye_icon" onClick={togglePasswordVisibility}>
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
                   </div>
                 </div>
                 {/* <label htmlFor="confirm-password">Confirm Password</label> */}
