@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Register.css';
-import {FaFacebook, FaGoogle } from 'react-icons/fa';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -60,7 +60,7 @@ function Register() {
                 />
                 <div className="password_container">
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type='password'
                     id="password"
                     placeholder="Enter your password"
                     className="password"
@@ -71,7 +71,7 @@ function Register() {
                 </div>
                 <div className="password_container">
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                  type="password"
                     id="confirm-password"
                     placeholder="Confirm your password"
                     className="password"

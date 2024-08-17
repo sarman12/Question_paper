@@ -3,7 +3,6 @@ const cors = require('cors');
 const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const PDFDocument = require('pdfkit');
-const fs = require('fs');
 
 const app = express();
 app.use(express.json());
@@ -35,49 +34,55 @@ sequelize.sync().then(() => {
   console.error("Error connecting to SQLite database:", err);
 });
 
-
-
 // Register route
 app.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
-  // Check if the user already exists
-  const existingUser = await Employee.findOne({ where: { email } });
-  if (existingUser) {
-    return res.status(400).json({ error: 'User already exists' });
+  try {
+    // Check if the user already exists
+    const existingUser = await Employee.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the new user
+    await Employee.create({ email, password: hashedPassword });
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    console.error('Error registering user:', err);
+    res.status(500).json({ error: 'Registration failed' });
   }
-
-  // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  // Create the new user
-  const newUser = await Employee.create({ email, password: hashedPassword });
-
-  res.status(201).json({ message: 'User registered successfully' });
 });
 
 // Login route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Find the user by email
-  const user = await Employee.findOne({ where: { email } });
+  try {
+    // Find the user by email
+    const user = await Employee.findOne({ where: { email } });
+    if (!user) {
+      return res.status(400).json({ error: 'User not found' });
+    }
 
-  if (!user) {
-    return res.status(400).json({ error: 'User not found' });
+    // Compare passwords
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    // Successful login
+    res.json({ message: 'Login successful' });
+  } catch (err) {
+    console.error('Error logging in:', err);
+    res.status(500).json({ error: 'Login failed' });
   }
-
-  // Compare passwords
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) {
-    return res.status(400).json({ error: 'Invalid credentials' });
-  }
-
-  // Successful login
-  res.json({ message: 'Login successful' });
 });
 
-
+// Generate PDF route
 app.post('/generate', (req, res) => {
   const { courseName, courseCode, questions } = req.body;
 
@@ -97,26 +102,19 @@ app.post('/generate', (req, res) => {
     const examTime = "Exam Time: 10am to 1pm";
 
     doc.fontSize(8).text(universityAddress, 0, 30, { align: 'right' });
-
     doc.fontSize(18).text(universityName, 50, 50, { align: 'center', bold: true });
-
     doc.fontSize(12).text(examHeading, 0, 110, { align: 'right', bold: true });
     doc.text(examTime, 50, 110, { align: 'left', bold: true });
-
     doc.fontSize(12).text(`Course Name: ${courseName}`, 50, 130);
     doc.text(`Course Code: ${courseCode}`, 50, 150);
-
     doc.moveTo(50, 170).lineTo(550, 170).stroke();
 
     // Questions
-    doc.moveDown(2); // Add some space after the line
+    doc.moveDown(2);
     doc.text("Questions:", 50, 190);
-
-    // Split and add questions
-    doc.moveDown();
     questions.split('\n').forEach((line, index) => {
       doc.text(`${index + 1}. ${line}`, 50, 210 + index * 20);
-      doc.moveDown(1); // Add some space between questions
+      doc.moveDown(1);
     });
 
     // Add footer with page numbers

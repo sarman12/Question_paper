@@ -65,7 +65,7 @@ function Dashboard() {
       </form>
       <div className="dashboard">
         <h1>Welcome Back Chief</h1>
-        <button onClick={() => navigate('/register')}>Sign Out</button>
+        <button onClick={() => navigate('/register')}>Log Out</button>
       </div>
     </div>
   );

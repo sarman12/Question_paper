@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -64,7 +58,7 @@ function Login() {
                   />
                   <div className="password_container">
                     <input
-                      type={showPassword ? 'text' : 'password'}
+                    type='password'
                       id="password"
                       placeholder="Enter your password"
                       className="password"
