@@ -20,15 +20,17 @@ function Login() {
       const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data);
-        navigate('/dashboard'); // Replace with your actual route
+
+        // Navigate to the dashboard on successful login
+        navigate('/dashboard');
       } else {
         console.error('Error logging in:', response.statusText);
         alert('Login failed. Please check your credentials and try again.');
@@ -52,27 +54,25 @@ function Login() {
               <p>Login</p>
               <form onSubmit={handleLogin}>
                 <div className="login_input_box">
-                  {/* <label htmlFor="email">Email</label> */}
                   <input
                     type="email"
                     id="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
-                  {/* <label htmlFor="password">Password</label> */}
                   <div className="password_container">
                     <input
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       id="password"
                       placeholder="Enter your password"
                       className="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      required
                     />
-                    <div className="login_eye_icon" onClick={togglePasswordVisibility}>
-                      {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
-                    </div>
+                    
                   </div>
                   <a href="#">Forgot Password?</a>
                 </div>

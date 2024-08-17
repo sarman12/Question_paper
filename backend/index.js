@@ -35,6 +35,49 @@ sequelize.sync().then(() => {
   console.error("Error connecting to SQLite database:", err);
 });
 
+
+
+// Register route
+app.post('/register', async (req, res) => {
+  const { email, password } = req.body;
+
+  // Check if the user already exists
+  const existingUser = await Employee.findOne({ where: { email } });
+  if (existingUser) {
+    return res.status(400).json({ error: 'User already exists' });
+  }
+
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Create the new user
+  const newUser = await Employee.create({ email, password: hashedPassword });
+
+  res.status(201).json({ message: 'User registered successfully' });
+});
+
+// Login route
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  // Find the user by email
+  const user = await Employee.findOne({ where: { email } });
+
+  if (!user) {
+    return res.status(400).json({ error: 'User not found' });
+  }
+
+  // Compare passwords
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(400).json({ error: 'Invalid credentials' });
+  }
+
+  // Successful login
+  res.json({ message: 'Login successful' });
+});
+
+
 app.post('/generate', (req, res) => {
   const { courseName, courseCode, questions } = req.body;
 
@@ -53,21 +96,16 @@ app.post('/generate', (req, res) => {
     const examHeading = "End Semester Exam - June-July 2024";
     const examTime = "Exam Time: 10am to 1pm";
 
-    // University Address (right-aligned and outside the border)
     doc.fontSize(8).text(universityAddress, 0, 30, { align: 'right' });
 
-    // University Name (center-aligned)
     doc.fontSize(18).text(universityName, 50, 50, { align: 'center', bold: true });
 
-    // Exam Heading (right-aligned) and Exam Time (left-aligned)
     doc.fontSize(12).text(examHeading, 0, 110, { align: 'right', bold: true });
     doc.text(examTime, 50, 110, { align: 'left', bold: true });
 
-    // Course details and questions
     doc.fontSize(12).text(`Course Name: ${courseName}`, 50, 130);
     doc.text(`Course Code: ${courseCode}`, 50, 150);
 
-    // Draw a line
     doc.moveTo(50, 170).lineTo(550, 170).stroke();
 
     // Questions

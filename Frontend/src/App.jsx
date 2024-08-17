@@ -4,8 +4,8 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Login from './component/Login/Login';
 import Register from './component/Register/Register';
 import FirstPage from './component/First_page/First_page';
-import './App.css';
 import Dashboard from './component/Dashboard/Dashboard';
+import './App.css';
 
 function App() {
   return (
@@ -14,16 +14,12 @@ function App() {
         <h3>Question Paper Generator</h3>
       </nav>
       <div className="component-wrapper">
-        <TransitionGroup className="transition-group">
-          <CSSTransition key={location.key} timeout={400} classNames="fade">
-            <Routes>
-              <Route path="/" element={<FirstPage />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-          </CSSTransition>
-        </TransitionGroup>
+        <Routes>
+          <Route path="/" element={<FirstPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
       </div>
       <footer className="first_page_footer">
         <h3>Copyright</h3>
